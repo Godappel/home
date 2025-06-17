@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet"> 
+  <style>
+    body{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.alert {
+  background: rgba(255,255,255,1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 10;
+  padding: 10px;
+}
+
+.alert ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.alert ul li b {
+  color: #589;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+}
+
+#container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+#wallpaper {
+  background-image: url('background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#wallpaper.slideUp {
+  transition: all 0.6s ease;
+  transform: translateY(-100%);
+}
+
+#wallpaper.slideDown {
+  transition: all 0.6s linear;
+  transform: translateY(0%);
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0.5em;
+}
+
+.icons i {
+  color: #fff;
+  margin-top: 0.7em;
+  margin-right: 2em;
+}
+
+#date_cont {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  animation: slideInFast 0.25s 0.25s linear forwards;
+  visibility: hidden;
+  transform: translateY(150%);
+  transition: all 0.6s ease both;
+}
+
+@keyframes slideInFast {
+  from{
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+#time {
+  font-size: 8em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 300;
+  color: #fff;
+  margin: 0;
+  margin-left: -15px;
+  padding: 0;
+}
+
+#date {
+  font-size: 2.5em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #fff;
+  margin-top: -0.6em;
+/*   padding-left: 0.4em; */
+}
+
+#taskbar {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.taskbar-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.taskbar-icon {
+  color: #fff;
+  font-size: 1.5em;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.taskbar-icon:hover {
+  color: #589;
+}
+
+.taskbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.taskbar-clock {
+  color: #fff;
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+  </style>
+</head>
+<body>
+	<div id="container">
+		<div id="wallpaper">
+			<div id="date_cont">
+				<div id="time">08:20</div>
+				<div id="date">Tuesday, October 8</div>
+				<div class="icons">
+					<i class="fa fa-wifi"></i>
+					<i class="fa fa-battery-full"></i>
+				</div>
+			</div>
+		</div>
+		<!-- Add your hidden content here -->
+		<div id="behind-content">
+      <link rel="stylesheet" href="lstyle.css">
+      <div class="desktop">
+        <div class="app-grid">
+          <a href="index.html" class="app-icon">
+            <img src="images/home-icon.png" alt="Home">
+            <span>Home</span>
+          </a>
+          <a href="#" class="app-icon" id="about-app-btn">
+            <img src="images/about.png" alt="About">
+            <span>About</span>
+          </a>
+          <a href="#" class="app-icon" id="projects-app-btn">
+            <img src="images/projects.png" alt="Projects">
+            <span>Projects</span>
+          </a>
+          <a href="https://www.wikipedia.org/" class="app-icon" target="_blank">
+            <img src="images/wikipedia.png" alt="Wikipedia">
+            <span>Wikipedia</span>
+          </a>
+          <a href="https://github.com/" class="app-icon" target="_blank">
+            <img src="images/github.png" alt="GitHub">
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.stackoverflow.com/" class="app-icon" target="_blank">
+            <img src="images/stack-overflow.png" alt="Stack Overflow">
+            <span>Stack Overflow</span>
+          </a>
+          <a href="#" class="app-icon" id="image-app-btn">
+            <img src="images/folder.png" alt="Photo">
+            <span>Section List</span>
+          </a>
+          <a href="#" class="app-icon" id="notes-app-btn">
+            <img src="images/folder.png" alt="Training Program">
+            <span>Training Program</span>
+          </a>
+        </div>
+      </div>
+      <button id="fullscreen-btn" style="
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  z-index: 10;
+  padding: 0.6em 1.2em;
+  font-size: 1.1em;
+  border-radius: 8px;
+  border: none;
+  background: rgba(66,62,62,0.85);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+">
+  ⛶ Fullscreen
+</button>
+    </div>
+	</div>
+	<div id="taskbar">
+    <div class="taskbar-center">
+        <a href="index.html" class="taskbar-icon" title="Home">
+            <img src="images/home-icon.png" alt="Home">
+        </a>
+        <a href="about.html" class="taskbar-icon" title="About" id="about-btn">
+            <img src="images/about.png" alt="About">
+        </a>
+        <a href="projects.html" class="taskbar-icon" title="Projects" id="projects-btn">
+            <img src="images/projects.png" alt="Projects">
+        </a>
+        <a href="https://github.com/" class="taskbar-icon" title="GitHub" target="_blank">
+            <img src="images/github.png" alt="GitHub">
+        </a>
+    </div>
+    <div class="taskbar-right">
+        <span class="taskbar-clock" id="taskbar-clock"></span>
+    </div>
+</div>
+
+<div id="about-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="close-about-modal">&times;</span>
+    <h2>About This Project</h2>
+    <p>
+      Welcome to the Project Homepage! This site serves as a central hub for all past and future projects.
+    </p>
+    <ul style="text-align:left; margin: 1em auto; max-width: 350px;">
+      <li><b>Home:</b> Quick access to the desktop overview and navigation.</li>
+      <li><b>Projects:</b> Browse all current and completed projects.</li>
+      <li><b>External Links:</b> Useful resources like Wikipedia, GitHub, and Stack Overflow.</li>
+    </ul>
+    <p>
+      <b>Created by:</b> Lincoln<br>
+      <b>Last updated:</b> June 2025
+    </p>
+    <p>
+      For more information or to contribute, visit the <a href="https://github.com/" target="_blank" style="color:#4af;">GitHub repository</a>.
+    </p>
+  </div>
+</div>
+
+<div id="projects-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="close-projects-modal">&times;</span>
+    <h2>Projects</h2>
+    <ul style="text-align:left; margin: 1em auto; max-width: 350px;">
+      <li><b>Project 1:</b> Description of your first project.</li>
+      <li><b>Project 2:</b> Description of your second project.</li>
+      <li><b>Project 3:</b> Description of your third project.</li>
+      <!-- Add more projects as needed -->
+    </ul>
+    <p>
+      For more details, visit the <a href="https://github.com/" target="_blank" style="color:#4af;">GitHub repository</a>.
+    </p>
+  </div>
+</div>
+
+<div id="image-modal" class="modal">
+  <div class="modal-content" style="text-align:center;">
+    <span class="close-modal" id="close-image-modal">&times;</span>
+    <h2>Section List</h2>
+    <img src="images/Section List.png" alt="Sample">
+    <p>Last updated on the 17/6/25</p>
+  </div>
+</div>
+
+<div id="notes-modal" class="modal">
+  <div class="modal-content" style="text-align:center;">
+    <span class="close-modal" id="close-notes-modal">&times;</span>
+    <h2>Training Program</h2>
+    <img src="images/Training Program.png" alt="Training Program">
+    <br>
+    <p>Last updated on the 17/6/25</p>
+  </div>
+</div>
+
+  <script>
+    (function(){
+  // Variable Definitions   
+  var time = document.querySelector('#time');
+  var dateElem = document.querySelector('#date');
+  var wallpaper = document.querySelector('#wallpaper');
+  var aboutModal = document.getElementById('about-modal');
+  var closeAboutModal = document.getElementById('close-about-modal');
+  var aboutBtn = document.getElementById('about-btn');
+  var projectsModal = document.getElementById('projects-modal');
+  var closeProjectsModal = document.getElementById('close-projects-modal');
+  var projectsBtn = document.getElementById('projects-btn');
+  var imageModal = document.getElementById('image-modal');
+  var closeImageModal = document.getElementById('close-image-modal');
+  var imageAppBtn = document.getElementById('image-app-btn');
+  var notesModal = document.getElementById('notes-modal');
+  var closeNotesModal = document.getElementById('close-notes-modal');
+  var notesAppBtn = document.getElementById('notes-app-btn');
+
+  // Date Configurations
+  var currentDate = new Date();
+  var hours = currentDate.getHours();
+  var minutes = currentDate.getMinutes();
+  var month = currentDate.getMonth();
+  var day = currentDate.getDay();
+  var dateOfMonth = currentDate.getDate();
+
+  var dayOfWeek = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var monthOfYear = [
+    'January', 
+    'February', 
+    'March', 
+    'April', 
+    'May', 
+    'June', 
+    'July', 
+    'August', 
+    'September', 
+    'October', 
+    'November', 
+    'December'
+  ];
+
+  // hours
+  if ((hours < 10)) {
+    time.innerHTML = '0' + hours + ':' + minutes;
+  } else {
+    time.innerHTML = hours + ':' + minutes;
+  }
+
+  // minutes
+  if ((minutes < 10)) {
+    time.innerHTML = hours + ':' + '0' + minutes;
+  } else {
+    time.innerHTML = hours + ':' + minutes;
+  }
+  
+  // Update Date Component
+  dateElem.innerHTML = dayOfWeek[day] + ", " + monthOfYear[month] + ' ' + dateOfMonth;
+
+  // Key Events
+  document.addEventListener('keypress', (e)=>{
+    // Enter Key (spacebar)
+    if(e.keyCode === 32) {
+      wallpaper.classList.remove('slideDown');
+      wallpaper.classList.add('slideUp');
+    }
+    // Spacebar Key (enter)
+    else if (e.keyCode === 13) {
+      wallpaper.classList.remove('slideUp');
+      wallpaper.classList.add('slideDown');
+    }
+  });
+
+  // About button opens modal only after lockscreen is gone
+  aboutBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (wallpaper.classList.contains('slideUp')) {
+      aboutModal.style.display = 'flex';
+    }
+  });
+  // About desktop icon opens modal only after lockscreen is gone
+  document.getElementById('about-app-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (wallpaper.classList.contains('slideUp')) {
+      aboutModal.style.display = 'flex';
+    }
+  });
+
+  // Projects button opens modal only after lockscreen is gone
+  projectsBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (wallpaper.classList.contains('slideUp')) {
+      projectsModal.style.display = 'flex';
+    }
+  });
+  // Projects desktop icon opens modal only after lockscreen is gone
+  document.getElementById('projects-app-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (wallpaper.classList.contains('slideUp')) {
+      projectsModal.style.display = 'flex';
+    }
+  });
+
+  // Image desktop icon opens modal only after lockscreen is gone
+  imageAppBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (wallpaper.classList.contains('slideUp')) {
+      imageModal.style.display = 'flex';
+    }
+  });
+
+  // Notes desktop icon opens modal only after lockscreen is gone
+  notesAppBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (wallpaper.classList.contains('slideUp')) {
+      notesModal.style.display = 'flex';
+    }
+  });
+
+  // Close modal when clicking on <span> (x)
+  closeAboutModal.onclick = function() {
+    aboutModal.style.display = "none";
+  }
+
+  // Close modal when clicking anywhere outside of the modal content
+  window.onclick = function(event) {
+    if (event.target == aboutModal) {
+      aboutModal.style.display = "none";
+    }
+  }
+
+  // Optional: close modal when clicking outside content (for accessibility)
+  aboutModal.addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+
+  // Close modal when clicking on <span> (x)
+  closeProjectsModal.onclick = function() {
+    projectsModal.style.display = "none";
+  }
+
+  // Close modal when clicking anywhere outside of the modal content
+  window.addEventListener('click', function(event) {
+    if (event.target == projectsModal) {
+      projectsModal.style.display = "none";
+    }
+  });
+
+  // Optional: close modal when clicking outside content (for accessibility)
+  projectsModal.addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+
+  // Close modal when clicking on <span> (x)
+  closeImageModal.onclick = function() {
+    imageModal.style.display = "none";
+  }
+
+  // Close modal when clicking anywhere outside of the modal content
+  window.addEventListener('click', function(event) {
+    if (event.target == imageModal) {
+      imageModal.style.display = "none";
+    }
+  });
+
+  // Optional: close modal when clicking outside content (for accessibility)
+  imageModal.addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+
+  // Close modal when clicking on <span> (x)
+  closeNotesModal.onclick = function() {
+    notesModal.style.display = "none";
+  }
+
+  // Close modal when clicking anywhere outside of the modal content
+  window.addEventListener('click', function(event) {
+    if (event.target == notesModal) {
+      notesModal.style.display = "none";
+    }
+  });
+
+  // Optional: close modal when clicking outside content (for accessibility)
+  notesModal.addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+
+  // Fullscreen toggle
+  var fullscreenBtn = document.getElementById('fullscreen-btn');
+  fullscreenBtn.addEventListener('click', function() {
+    const elem = document.documentElement;
+    if (!document.fullscreenElement) {
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+    }
+  });
+
+  // Hide/show fullscreen button based on fullscreen state
+  document.addEventListener('fullscreenchange', function() {
+    if (document.fullscreenElement) {
+      fullscreenBtn.style.display = 'none';
+    } else {
+      fullscreenBtn.style.display = '';
+    }
+  });
+  document.addEventListener('webkitfullscreenchange', function() {
+    if (document.webkitFullscreenElement) {
+      fullscreenBtn.style.display = 'none';
+    } else {
+      fullscreenBtn.style.display = '';
+    }
+  });
+  document.addEventListener('msfullscreenchange', function() {
+    if (document.msFullscreenElement) {
+      fullscreenBtn.style.display = 'none';
+    } else {
+      fullscreenBtn.style.display = '';
+    }
+  });
+})();
+  </script>
+  </body>
+</html>
