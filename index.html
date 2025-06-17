@@ -572,6 +572,27 @@
       fullscreenBtn.style.display = '';
     }
   });
+    // Touch swipe up to unlock (slideUp)
+let touchStartY = null;
+let touchEndY = null;
+
+document.addEventListener('touchstart', function(e) {
+  if (e.touches.length === 1) {
+    touchStartY = e.touches[0].clientY;
+  }
+});
+
+document.addEventListener('touchend', function(e) {
+  if (touchStartY === null) return;
+  touchEndY = e.changedTouches[0].clientY;
+  // Detect swipe up: startY - endY > threshold (e.g., 60px)
+  if (touchStartY - touchEndY > 60) {
+    wallpaper.classList.remove('slideDown');
+    wallpaper.classList.add('slideUp');
+  }
+  touchStartY = null;
+  touchEndY = null;
+});
 })();
   </script>
   </body>
